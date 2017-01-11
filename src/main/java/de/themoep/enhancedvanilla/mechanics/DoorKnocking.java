@@ -121,6 +121,8 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
 
         if (knockWithRightClick)
             event.setUseInteractedBlock(Event.Result.DENY);
+
+        event.setCancelled(true);
     }
 
     private class Knock {
