@@ -7,7 +7,7 @@ commands:
   enhancedvanilla:
     aliases: [ev,evanilla]
     description: Command description.
-    usage: /<command>
+    usage: /<command> [reload]
     permission: enhancedvanilla.command
     permission-message: You don't have the permission <permission>
 permissions:
