@@ -67,9 +67,9 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
                 Material mat = Material.valueOf(matStr.toUpperCase());
                 if (soundsCfg.isConfigurationSection(matStr)) {
                     sounds.put(mat, new Knock(
-                            soundsCfg.getString("sound"),
-                            (float) soundsCfg.getDouble("volume", 1),
-                            (float) soundsCfg.getDouble("pitch", 1))
+                            soundsCfg.getString(matStr + ".sound"),
+                            (float) soundsCfg.getDouble(matStr + ".volume", 1),
+                            (float) soundsCfg.getDouble(matStr + ".pitch", 1))
                     );
                 } else {
                     sounds.put(mat, new Knock(soundsCfg.getString(matStr)));
