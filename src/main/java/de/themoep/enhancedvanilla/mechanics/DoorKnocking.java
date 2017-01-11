@@ -21,6 +21,7 @@ import com.google.common.cache.CacheBuilder;
 import de.themoep.enhancedvanilla.EnhancedVanilla;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -129,7 +130,7 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         event.getClickedBlock().getWorld().playSound(event.getClickedBlock().getLocation(), knock.getSound(), knock.getVolume(), knock.getPitch());
 
         if (knockWithRightClick)
-            event.setCancelled(true);
+            event.setUseInteractedBlock(Event.Result.DENY);
     }
 
     private class Knock {
