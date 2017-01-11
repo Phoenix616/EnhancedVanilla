@@ -30,7 +30,7 @@ import java.util.logging.Level;
 public abstract class EnhancedMechanic {
 
     protected final EnhancedVanilla plugin;
-    private boolean enabled;
+    private boolean enabled = false;
     private String configKey;
     private String permissionNode;
     private String name;
