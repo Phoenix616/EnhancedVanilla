@@ -61,7 +61,7 @@ public class ChickenShearing extends AdvancedEnhancedMechanic implements Listene
 
         if (!shearWithoutShears) {
             ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
-            if (tool != null && tool.getType() == Material.SHEARS)
+            if (tool != null && tool.getType() != Material.SHEARS)
                 return;
         }
 
