@@ -1,0 +1,48 @@
+tree-cutter: true
+safe-mounts: true
+chicken-shearing: true
+ladder-drop-down: false # Might be broken
+minecart-block-placement: true
+shave-snow-layers: true
+better-silk-touch:
+  enabled: true
+  blocks:
+  - GRASS_PATH
+  - FROSTED_ICE
+  - SOIL
+door-knocking:
+  enabled: true
+  requires-sneaking: true
+  knock-with-rightclick: true
+  sounds:
+    iron_door_block: entity.zombie.attack_iron_door
+    wooden_door: entity.zombie.attack_door_wood
+    acacia_door: entity.zombie.attack_door_wood
+    birch_door: entity.zombie.attack_door_wood
+    jungle_door: entity.zombie.attack_door_wood
+    spruce_door: entity.zombie.attack_door_wood
+    dark_oak_door: entity.zombie.attack_door_wood
+    wood_trapdoor:
+      sound: entity.zombie.attack_door_wood
+      pitch: 1.5
+    iron_trapdoor:
+      sound: entity.zombie.attack_iron_door
+      pitch: 1.2
+    wooden_fence_gate:
+      sound: entity.zombie.attack_door_wood
+      pitch: 2
+    acacia_fence_gate:
+      sound: entity.zombie.attack_door_wood
+      pitch: 2
+    birch_fence_gate:
+      sound: entity.zombie.attack_door_wood
+      pitch: 2
+    jungle_fence_gate:
+      sound: entity.zombie.attack_door_wood
+      pitch: 2
+    spruce_fence_gate:
+      sound: entity.zombie.attack_door_wood
+      pitch: 2
+    dark_oak_fence_gate:
+      sound: entity.zombie.attack_door_wood
+      pitch: 2

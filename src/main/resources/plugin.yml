@@ -1,0 +1,34 @@
+name: ${project.name}
+main: de.themoep.enhancedvanilla.EnhancedVanilla
+version: '${minecraft.plugin.version}'
+description: ${project.description}
+authors: [Phoenix616]
+commands:
+  enhancedvanilla:
+    aliases: [ev,evanilla]
+    description: Command description.
+    usage: /<command>
+    permission: enhancedvanilla.command
+    permission-message: You don't have the permission <permission>
+permissions:
+  enhancedvanilla.command:
+    description: Gives permission to the plugin command
+    default: op
+  enhancedvanilla.mechanic.treecutter:
+    description: Gives permission to use the treecutter mechanic
+    default: true
+  enhancedvanilla.mechanic.chickenshearing:
+    description: Gives permission to use the chicken shearing mechanic
+    default: true
+  enhancedvanilla.mechanic.dropdownladder:
+    description: Gives permission to use the drop down ladder mechanic
+    default: true
+  enhancedvanilla.mechanic.minecartblockplacement.*:
+    description: Gives permission to place blocks into minecarts
+    default: true
+  enhancedvanilla.mechanic.shavesnowlayers:
+    description: Gives permission to shave snow layers
+    default: true
+  enhancedvanilla.mechanic.doorknocking:
+    description: Gives permission to knock on doors
+    default: true
