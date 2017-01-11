@@ -58,7 +58,7 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         if (knockWithRightClick) {
             isBreakingBlock = null;
         } else {
-            isBreakingBlock = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.SECONDS).build();
+            isBreakingBlock = CacheBuilder.newBuilder().expireAfterAccess(250, TimeUnit.MILLISECONDS).build();
         }
 
         ConfigurationSection soundsCfg = getConfig().getConfigurationSection("sounds");
@@ -100,10 +100,10 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         if (requiresSneaking && !event.getPlayer().isSneaking())
             return;
 
-        if (knockWithRightClick && event.getAction() != Action.RIGHT_CLICK_BLOCK)
+        if (knockWithRightClick && event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR)
             return;
 
-        if (!knockWithRightClick && event.getAction() != Action.LEFT_CLICK_BLOCK)
+        if (!knockWithRightClick && event.getAction() != Action.LEFT_CLICK_BLOCK && event.getAction() != Action.LEFT_CLICK_AIR)
             return;
 
         if (!knockWithRightClick && isBreakingBlock.getIfPresent(event.getPlayer().getUniqueId()) != null)
