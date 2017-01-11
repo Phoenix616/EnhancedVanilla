@@ -39,6 +39,7 @@ public class EnhancedVanilla extends JavaPlugin {
         registerMechanic(new MinecartBlockPlacement(this));
         registerMechanic(new ShaveSnowLayers(this));
         registerMechanic(new BetterSilkTouch(this));
+        registerMechanic(new DoorKnocking(this));
 
         loadConfig();
     }
