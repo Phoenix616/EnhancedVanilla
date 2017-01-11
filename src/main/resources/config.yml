@@ -1,6 +1,9 @@
 tree-cutter: true
 safe-mounts: true
-chicken-shearing: true
+chicken-shearing:
+  enabled: true
+  damage-per-shear: 1
+  shear-without-shears: false
 ladder-drop-down: false # Might be broken
 minecart-block-placement: true
 shave-snow-layers: true

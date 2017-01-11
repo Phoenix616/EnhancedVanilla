@@ -25,19 +25,27 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.LazyMetadataValue;
 
 import java.util.Iterator;
 
-public class ChickenShearing extends EnhancedMechanic implements Listener {
+public class ChickenShearing extends AdvancedEnhancedMechanic implements Listener {
+
+    private double damagePerShear;
+    private boolean shearWithoutShears;
 
     public ChickenShearing(EnhancedVanilla plugin) {
         super(plugin);
+    }
+
+    @Override
+    public void loadConfig() {
+        super.loadConfig();
+        damagePerShear = getConfig().getDouble("damage-per-shear");
+        shearWithoutShears = getConfig().getBoolean("shear-without-shears");
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -51,6 +59,12 @@ public class ChickenShearing extends EnhancedMechanic implements Listener {
         if (event.getRightClicked().getType() != EntityType.CHICKEN)
             return;
 
+        if (!shearWithoutShears) {
+            ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
+            if (tool != null && tool.getType() == Material.SHEARS)
+                return;
+        }
+
         Chicken chicken = (Chicken) event.getRightClicked();
         if (!chicken.isAdult())
             return;
@@ -59,7 +73,7 @@ public class ChickenShearing extends EnhancedMechanic implements Listener {
             return;
 
         chicken.setMetadata("ehSheared", new FixedMetadataValue(plugin, true));
-        chicken.damage(1, event.getPlayer());
+        chicken.damage(damagePerShear, event.getPlayer());
         EnhancedUtils.damageTool(event.getPlayer());
         if (chicken.getHealth() > 0) {
             chicken.getLocation().getWorld().dropItemNaturally(chicken.getLocation(), new ItemStack(Material.FEATHER));
