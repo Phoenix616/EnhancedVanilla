@@ -127,6 +127,9 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         Knock knock = sounds.get(event.getClickedBlock().getState().getData());
 
         event.getClickedBlock().getWorld().playSound(event.getClickedBlock().getLocation(), knock.getSound(), knock.getVolume(), knock.getPitch());
+
+        if (knockWithRightClick)
+            event.setCancelled(true);
     }
 
     private class Knock {
