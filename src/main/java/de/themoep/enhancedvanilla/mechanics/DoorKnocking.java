@@ -38,7 +38,7 @@ import java.util.logging.Level;
 
 public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
 
-    private Map<MaterialData, Knock> sounds = new HashMap<>();
+    private Map<Material, Knock> sounds = new HashMap<>();
     private boolean requiresSneaking;
     private boolean knockWithRightClick;
 
@@ -64,26 +64,16 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         ConfigurationSection soundsCfg = getConfig().getConfigurationSection("sounds");
         for (String matStr : soundsCfg.getKeys(false)) {
             try {
-                MaterialData data = null;
-                String[] parts = matStr.split(":");
-                Material mat = Material.valueOf(parts[0].toUpperCase());
-                if (parts.length > 1) {
-                    data = new MaterialData(mat, Byte.parseByte(parts[1]));
-                } else {
-                    data = new MaterialData(mat);
-                }
-
+                Material mat = Material.valueOf(matStr.toUpperCase());
                 if (soundsCfg.isConfigurationSection(matStr)) {
-                    sounds.put(data, new Knock(
+                    sounds.put(mat, new Knock(
                             soundsCfg.getString("sound"),
                             (float) soundsCfg.getDouble("volume", 1),
                             (float) soundsCfg.getDouble("pitch", 1))
                     );
                 } else {
-                    sounds.put(data, new Knock(soundsCfg.getString(matStr)));
+                    sounds.put(mat, new Knock(soundsCfg.getString(matStr)));
                 }
-
-
             } catch (NumberFormatException e) {
                 log(Level.SEVERE, matStr + " is not a valid Bukkit MaterialData!");
             } catch (IllegalArgumentException e) {
@@ -122,10 +112,10 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         if (!event.getPlayer().hasPermission(getPermissionNode()))
             return;
 
-        if (event.getClickedBlock() == null || !sounds.containsKey(event.getClickedBlock().getState().getData()))
+        if (event.getClickedBlock() == null || !sounds.containsKey(event.getClickedBlock().getType()))
             return;
 
-        Knock knock = sounds.get(event.getClickedBlock().getState().getData());
+        Knock knock = sounds.get(event.getClickedBlock().getType());
 
         event.getClickedBlock().getWorld().playSound(event.getClickedBlock().getLocation(), knock.getSound(), knock.getVolume(), knock.getPitch());
 
