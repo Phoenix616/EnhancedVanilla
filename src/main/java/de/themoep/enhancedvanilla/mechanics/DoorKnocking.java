@@ -16,25 +16,32 @@ package de.themoep.enhancedvanilla.mechanics;
  * along with this program. If not, see <http://mozilla.org/MPL/2.0/>.
  */
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import de.themoep.enhancedvanilla.EnhancedVanilla;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.material.MaterialData;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
 
     private Map<MaterialData, Knock> sounds = new HashMap<>();
     private boolean requiresSneaking;
-    private boolean knockWithRightclick;
+    private boolean knockWithRightClick;
+
+    Cache<UUID, Boolean> isBreakingBlock;
 
     public DoorKnocking(EnhancedVanilla plugin) {
         super(plugin);
@@ -45,7 +52,13 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         super.loadConfig();
 
         requiresSneaking = getConfig().getBoolean("requires-sneaking");
-        knockWithRightclick = getConfig().getBoolean("knock-with-rightclick");
+        knockWithRightClick = getConfig().getBoolean("knock-with-right-click");
+
+        if (knockWithRightClick) {
+            isBreakingBlock = null;
+        } else {
+            isBreakingBlock = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.SECONDS).build();
+        }
 
         ConfigurationSection soundsCfg = getConfig().getConfigurationSection("sounds");
         for (String matStr : soundsCfg.getKeys(false)) {
@@ -79,6 +92,13 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
+    public void onPlayerBlockDamage(BlockDamageEvent event) {
+        if (!knockWithRightClick && isBreakingBlock.getIfPresent(event.getPlayer().getUniqueId()) == null) {
+            isBreakingBlock.put(event.getPlayer().getUniqueId(), true);
+        }
+    }
+
+    @EventHandler
     public void onPlayerDoorKnock(PlayerInteractEvent event) {
         if (!isEnabled())
             return;
@@ -89,10 +109,13 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         if (requiresSneaking && !event.getPlayer().isSneaking())
             return;
 
-        if (knockWithRightclick && event.getAction() != Action.RIGHT_CLICK_BLOCK)
+        if (knockWithRightClick && event.getAction() != Action.RIGHT_CLICK_BLOCK)
             return;
 
-        if (!knockWithRightclick && event.getAction() != Action.LEFT_CLICK_BLOCK)
+        if (!knockWithRightClick && event.getAction() != Action.LEFT_CLICK_BLOCK)
+            return;
+
+        if (!knockWithRightClick && isBreakingBlock.getIfPresent(event.getPlayer().getUniqueId()) != null)
             return;
 
         if (!event.getPlayer().hasPermission(getPermissionNode()))

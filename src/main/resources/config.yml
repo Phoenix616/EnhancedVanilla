@@ -13,7 +13,7 @@ better-silk-touch:
 door-knocking:
   enabled: true
   requires-sneaking: true
-  knock-with-rightclick: true
+  knock-with-right-click: true
   sounds:
     iron_door_block: entity.zombie.attack_iron_door
     wooden_door: entity.zombie.attack_door_wood
