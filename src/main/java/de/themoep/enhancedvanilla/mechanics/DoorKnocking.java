@@ -97,17 +97,25 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         if (event.getHand() != EquipmentSlot.HAND)
             return;
 
-        if (requiresSneaking && !event.getPlayer().isSneaking())
+        if (requiresSneaking) {
+            if (!event.getPlayer().isSneaking()) {
+                return;
+            }
+        } else if (event.getPlayer().isSneaking()) {
             return;
+        }
 
-        if (knockWithRightClick && event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR)
-            return;
+        if (knockWithRightClick) {
+            if (event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR) {
+                return;
+            }
+        } else {
+            if (event.getAction() != Action.LEFT_CLICK_BLOCK && event.getAction() != Action.LEFT_CLICK_AIR)
+                return;
 
-        if (!knockWithRightClick && event.getAction() != Action.LEFT_CLICK_BLOCK && event.getAction() != Action.LEFT_CLICK_AIR)
-            return;
-
-        if (!knockWithRightClick && isBreakingBlock.getIfPresent(event.getPlayer().getUniqueId()) != null)
-            return;
+            if (isBreakingBlock.getIfPresent(event.getPlayer().getUniqueId()) != null)
+                return;
+        }
 
         if (!event.getPlayer().hasPermission(getPermissionNode()))
             return;
