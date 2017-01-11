@@ -25,13 +25,13 @@ door-knocking:
     jungle_door: entity.zombie.attack_door_wood
     spruce_door: entity.zombie.attack_door_wood
     dark_oak_door: entity.zombie.attack_door_wood
-    wood_trapdoor:
+    trap_door:
       sound: entity.zombie.attack_door_wood
       pitch: 1.5
     iron_trapdoor:
       sound: entity.zombie.attack_iron_door
       pitch: 1.2
-    wooden_fence_gate:
+    fence_gate:
       sound: entity.zombie.attack_door_wood
       pitch: 2
     acacia_fence_gate:
