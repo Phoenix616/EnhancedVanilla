@@ -41,6 +41,7 @@ public class EnhancedVanilla extends JavaPlugin {
         registerMechanic(new BetterSilkTouch(this));
         registerMechanic(new DoorKnocking(this));
         registerMechanic(new BetterCompass(this));
+        registerMechanic(new MorePigs(this));
 
         loadConfig();
     }

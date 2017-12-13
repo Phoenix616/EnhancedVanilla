@@ -26,6 +26,11 @@ better-compass:
   # Possible values: north, east, south, west, spawnpoint, worldspawn, lastdeath, <x>/<z>
   point-to: spawnpoint
 
+# Increase the amount of litters of pigs
+more-pigs:
+  enabled: true
+  amount: 4
+
 door-knocking:
   enabled: true
   requires-sneaking: true
