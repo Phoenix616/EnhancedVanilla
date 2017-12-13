@@ -1,18 +1,31 @@
 tree-cutter: true
+
 safe-mounts: true
+
 chicken-shearing:
   enabled: true
   damage-per-shear: 1
   shear-without-shears: false
+
 ladder-drop-down: false # Might be broken
+
 minecart-block-placement: true
+
 shave-snow-layers: true
+
 better-silk-touch:
   enabled: true
   blocks:
   - GRASS_PATH
   - FROSTED_ICE
   - SOIL
+
+better-compass:
+  enabled: true
+  # Set where the compass should point to
+  # Possible values: north, east, south, west, spawnpoint, worldspawn, lastdeath, <x>/<z>
+  point-to: spawnpoint
+
 door-knocking:
   enabled: true
   requires-sneaking: true
