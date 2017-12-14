@@ -31,6 +31,16 @@ more-pigs:
   enabled: true
   amount: 4
 
+# Heal mobs (like golems) by clicking (or throwing with snowballs) with an item
+heal-items:
+  enabled: true
+  snow-golem:
+    snow_ball: 1.0
+    snow_block: 9.0
+  iron-golem:
+    iron: 1.0
+    iron_ingot: 9.0
+
 door-knocking:
   enabled: true
   requires-sneaking: true
