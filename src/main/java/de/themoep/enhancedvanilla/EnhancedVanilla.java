@@ -41,7 +41,7 @@ public class EnhancedVanilla extends JavaPlugin {
         registerMechanic(new BetterSilkTouch(this));
         registerMechanic(new DoorKnocking(this));
         
-        // The following mechanics are based on ideas by SimlySarc: https://youtu.be/NSsac8V3BpA
+        // The following mechanics are based on ideas by SimplySarc: https://youtu.be/NSsac8V3BpA
         registerMechanic(new BetterCompass(this));
         registerMechanic(new MorePigs(this));
         registerMechanic(new HealItems(this));
