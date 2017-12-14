@@ -1,23 +1,29 @@
 package de.themoep.enhancedvanilla;
 
-import org.bukkit.Bukkit;
+import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attributable;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Leaves;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
-import static org.bukkit.Material.AIR;
 
 /**
  * EnhancedVanilla
@@ -37,7 +43,7 @@ import static org.bukkit.Material.AIR;
  */
 public class EnhancedUtils {
 
-    private static Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     public static List<Block> getTree(Block block) {
         if(block.getType() != Material.LOG && block.getType() != Material.LOG_2)
@@ -139,7 +145,7 @@ public class EnhancedUtils {
         }
 
         int unbreaking = tool.getEnchantmentLevel(Enchantment.DURABILITY);
-        boolean damage = unbreaking == 0 || random.nextDouble() < 1 / (unbreaking + 1);
+        boolean damage = unbreaking == 0 || RANDOM.nextDouble() < 1 / (unbreaking + 1);
         if (damage) {
             tool.setDurability((short) (tool.getDurability() + 1));
             player.getInventory().setItemInMainHand(tool);
@@ -149,5 +155,46 @@ public class EnhancedUtils {
         }
 
         return tool;
+    }
+    
+    /**
+     * Get a random value from an array
+     * @param values    The array
+     * @return          A random value from the array
+     */
+    public static <T> T random(T[] values) {
+        return values[RANDOM.nextInt(values.length)];
+    }
+    
+    /**
+     * Merge the attributes base values of different entities with each other
+     * @param attribute The attribute to merge
+     * @param entities  The entities to merge
+     * @return          The merged value
+     */
+    public static double mergeAttributes(Attribute attribute, Attributable... entities) {
+        double value = 0;
+        int amount = 0;
+        for (; amount < entities.length; amount++) {
+            AttributeInstance instance = entities[amount].getAttribute(attribute);
+            if (instance != null) {
+                value += instance.getBaseValue();
+            }
+        }
+        return amount > 0 ? value / amount : 0;
+    }
+    
+    /**
+     * Directly set the merged attributes
+     * @param attribute The attribute to set
+     * @param entities  The entities to merge. The attribute of the first one will be set!
+     * @throws IllegalArgumentException If no entity was provided
+     */
+    public static void setMergedAttributes(Attribute attribute, LivingEntity... entities) {
+        Validate.isTrue(entities.length > 1, "You need to at least provide two entities");
+        AttributeInstance instance = entities[0].getAttribute(attribute);
+        if (instance != null) {
+            instance.setBaseValue(mergeAttributes(attribute, entities));
+        }
     }
 }

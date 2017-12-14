@@ -26,20 +26,38 @@ better-compass:
   # Possible values: north, east, south, west, spawnpoint, worldspawn, lastdeath, <x>/<z>
   point-to: spawnpoint
 
-# Increase the amount of litters of pigs
-more-pigs:
+# Increase the amount of litters of mobs
+# If a minimum is not defined it will assume 1, default max is 10
+bigger-litters:
   enabled: true
-  amount: 4
+  # Whether or not to give more exp depending on the size of the liter
+  more-exp: true
+  mobs:
+    pig:
+      min: 3
+      max: 10
+    rabbit:
+      min: 3
+      max: 7
+    chicken:
+      min: 2
+      max: 5
+    ocelot:
+      min: 2
+      max: 4
+    wolf:
+      max: 6
 
 # Heal mobs (like golems) by clicking (or throwing with snowballs) with an item
 heal-items:
   enabled: true
-  snow-golem:
-    snow_ball: 1.0
-    snow_block: 9.0
-  iron-golem:
-    iron: 1.0
-    iron_ingot: 9.0
+  mobs:
+    snow-golem:
+      snow_ball: 1.0
+      snow_block: 9.0
+    iron-golem:
+      iron: 1.0
+      iron_ingot: 9.0
 
 door-knocking:
   enabled: true

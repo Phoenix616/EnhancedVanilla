@@ -44,7 +44,7 @@ public class HealItems extends AdvancedEnhancedMechanic implements Listener {
     @Override
     public void loadConfig() {
         super.loadConfig();
-        for (String typeStr : getConfig().getKeys(false)) {
+        for (String typeStr : getConfig().getConfigurationSection("mobs").getKeys(false)) {
             healSettings.put(EntityType.valueOf(typeStr.toUpperCase()), new HealSetting(getConfig().getConfigurationSection(typeStr)));
         }
     }

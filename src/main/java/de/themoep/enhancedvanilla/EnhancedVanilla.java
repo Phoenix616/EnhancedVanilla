@@ -43,7 +43,7 @@ public class EnhancedVanilla extends JavaPlugin {
         
         // The following mechanics are based on ideas by SimplySarc: https://youtu.be/NSsac8V3BpA
         registerMechanic(new BetterCompass(this));
-        registerMechanic(new MorePigs(this));
+        registerMechanic(new BiggerLitters(this));
         registerMechanic(new HealItems(this));
         // TODO: Attacking Polar Bears (all mobs?)
         // TODO: Auto breeding of certain mobs? (Difficulty: Rabbits)
