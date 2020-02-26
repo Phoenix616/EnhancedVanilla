@@ -18,7 +18,7 @@ better-silk-touch:
   blocks:
   - GRASS_PATH
   - FROSTED_ICE
-  - SOIL
+  - FARMLAND
 
 better-compass:
   enabled: true
@@ -53,7 +53,7 @@ heal-items:
   enabled: true
   mobs:
     snow-golem:
-      snow_ball: 1.0
+      snowball: 1.0
       snow_block: 9.0
     iron-golem:
       iron: 1.0
@@ -65,33 +65,33 @@ door-knocking:
   knock-with-right-click: false
   sounds:
     iron_door_block: entity.zombie.attack_iron_door
-    wooden_door: entity.zombie.attack_door_wood
-    acacia_door: entity.zombie.attack_door_wood
-    birch_door: entity.zombie.attack_door_wood
-    jungle_door: entity.zombie.attack_door_wood
-    spruce_door: entity.zombie.attack_door_wood
-    dark_oak_door: entity.zombie.attack_door_wood
+    wooden_door: entity.zombie.attack_wooden_door
+    acacia_door: entity.zombie.attack_wooden_door
+    birch_door: entity.zombie.attack_wooden_door
+    jungle_door: entity.zombie.attack_wooden_door
+    spruce_door: entity.zombie.attack_wooden_door
+    dark_oak_door: entity.zombie.attack_wooden_door
     trap_door:
-      sound: entity.zombie.attack_door_wood
+      sound: entity.zombie.attack_wooden_door
       pitch: 1.5
     iron_trapdoor:
       sound: entity.zombie.attack_iron_door
       pitch: 1.2
     fence_gate:
-      sound: entity.zombie.attack_door_wood
+      sound: entity.zombie.attack_wooden_door
       pitch: 2
     acacia_fence_gate:
-      sound: entity.zombie.attack_door_wood
+      sound: entity.zombie.attack_wooden_door
       pitch: 2
     birch_fence_gate:
-      sound: entity.zombie.attack_door_wood
+      sound: entity.zombie.attack_wooden_door
       pitch: 2
     jungle_fence_gate:
-      sound: entity.zombie.attack_door_wood
+      sound: entity.zombie.attack_wooden_door
       pitch: 2
     spruce_fence_gate:
-      sound: entity.zombie.attack_door_wood
+      sound: entity.zombie.attack_wooden_door
       pitch: 2
     dark_oak_fence_gate:
-      sound: entity.zombie.attack_door_wood
+      sound: entity.zombie.attack_wooden_door
       pitch: 2

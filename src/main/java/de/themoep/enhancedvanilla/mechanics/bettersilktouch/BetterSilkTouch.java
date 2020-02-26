@@ -32,7 +32,7 @@ import java.util.logging.Level;
 
 public class BetterSilkTouch extends AdvancedEnhancedMechanic implements Listener {
 
-    private Set<MaterialData> blocks = new HashSet<>();
+    private Set<Material> blocks = new HashSet<>();
 
     public BetterSilkTouch(EnhancedVanilla plugin) {
         super(plugin);
@@ -43,17 +43,10 @@ public class BetterSilkTouch extends AdvancedEnhancedMechanic implements Listene
         super.loadConfig();
 
         for (String matStr : getConfig().getStringList("blocks")) {
-            try {
-                String[] parts = matStr.split(":");
-                Material mat = Material.valueOf(parts[0].toUpperCase());
-                if (parts.length > 1) {
-                    blocks.add(new MaterialData(mat, Byte.parseByte(parts[1])));
-                } else {
-                    blocks.add(new MaterialData(mat));
-                }
-            } catch (NumberFormatException e) {
-                log(Level.SEVERE, matStr + " is not a valid Bukkit MaterialData!");
-            } catch (IllegalArgumentException e) {
+            Material mat = Material.matchMaterial(matStr);
+            if (mat != null) {
+                blocks.add(mat);
+            } else {
                 log(Level.SEVERE, matStr + " is not a valid Bukkit Material name!");
             }
         }
@@ -71,7 +64,7 @@ public class BetterSilkTouch extends AdvancedEnhancedMechanic implements Listene
         if (!event.getPlayer().hasPermission(getPermissionNode()))
             return;
 
-        if (!blocks.contains(event.getBlock().getState().getData()))
+        if (!blocks.contains(event.getBlock().getType()))
             return;
 
         ItemStack drop = event.getBlock().getState().getData().toItemStack(1);

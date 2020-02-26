@@ -18,6 +18,7 @@ package de.themoep.enhancedvanilla.mechanics;
 
 import de.themoep.enhancedvanilla.EnhancedVanilla;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -54,7 +55,8 @@ public class HealItems extends AdvancedEnhancedMechanic implements Listener {
         if (!isEnabled()
                 || event.getHand() != EquipmentSlot.HAND
                 || !(event.getRightClicked() instanceof LivingEntity)
-                || event.getPlayer().getInventory().getItemInMainHand() == null) {
+                || event.getPlayer().getInventory().getItemInMainHand() == null
+                || event.getPlayer().getInventory().getItemInMainHand().getType().isAir()) {
             return;
         }
         
@@ -74,7 +76,7 @@ public class HealItems extends AdvancedEnhancedMechanic implements Listener {
             Material material = null;
             switch (event.getDamager().getType()) {
                 case SNOWBALL:
-                    material = Material.SNOW_BALL;
+                    material = Material.SNOWBALL;
                     break;
                 case ARROW:
                     material = Material.ARROW;
@@ -83,13 +85,16 @@ public class HealItems extends AdvancedEnhancedMechanic implements Listener {
                     material = Material.SPECTRAL_ARROW;
                     break;
                 case SMALL_FIREBALL:
-                    material = Material.FIREBALL;
+                    material = Material.FIRE_CHARGE;
                     break;
                 case FIREWORK:
-                    material = Material.FIREWORK;
+                    material = Material.FIREWORK_ROCKET;
                     break;
                 case SPLASH_POTION:
                     material = Material.SPLASH_POTION;
+                    break;
+                case WITHER_SKULL:
+                    material = Material.WITHER_SKELETON_SKULL;
                     break;
             }
             if (heal((LivingEntity) event.getEntity(), material)) {
@@ -99,7 +104,7 @@ public class HealItems extends AdvancedEnhancedMechanic implements Listener {
     }
     
     private boolean heal(LivingEntity entity, Material material) {
-        if (entity == null || entity.getHealth() == entity.getMaxHealth() || material == null) {
+        if (entity == null || entity.getHealth() == entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() || material == null) {
             return false;
         }
     
@@ -108,8 +113,8 @@ public class HealItems extends AdvancedEnhancedMechanic implements Listener {
             Double amount = setting.getAmount(material);
             if (amount != null) {
                 double newHealth = entity.getHealth() + amount;
-                if (newHealth > entity.getMaxHealth()) {
-                    newHealth = entity.getMaxHealth();
+                if (newHealth > entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+                    newHealth = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
                 }
                 entity.setHealth(newHealth);
                 return true;

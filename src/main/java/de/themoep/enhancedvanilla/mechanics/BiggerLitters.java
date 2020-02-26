@@ -6,11 +6,11 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.Ageable;
+import org.bukkit.entity.Cat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Llama;
-import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Rabbit;
 import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
@@ -61,18 +61,18 @@ public class BiggerLitters extends AdvancedEnhancedMechanic implements Listener 
                     ((Tameable) entity).setOwner(((Tameable) event.getMother()).getOwner());
                 }
                 
-                if (entity instanceof Ocelot) {
-                    if (event.getMother() instanceof Ocelot && event.getFather() instanceof Ocelot) {
-                        if (((Ocelot) event.getMother()).isSitting() != ((Ocelot) event.getFather()).isSitting()) {
-                            Ocelot mobile = (Ocelot) (((Ocelot) event.getMother()).isSitting() ? event.getFather() : event.getMother());
-                            ((Ocelot) entity).setCatType(mobile.getCatType());
+                if (entity instanceof Cat) {
+                    if (event.getMother() instanceof Cat && event.getFather() instanceof Cat) {
+                        if (((Cat) event.getMother()).isSitting() != ((Cat) event.getFather()).isSitting()) {
+                            Cat mobile = (Cat) (((Cat) event.getMother()).isSitting() ? event.getFather() : event.getMother());
+                            ((Cat) entity).setCatType(mobile.getCatType());
                         } else if (RANDOM.nextBoolean()) {
-                            ((Ocelot) entity).setCatType(((Ocelot) event.getMother()).getCatType());
+                            ((Cat) entity).setCatType(((Cat) event.getMother()).getCatType());
                         } else {
-                            ((Ocelot) entity).setCatType(((Ocelot) event.getFather()).getCatType());
+                            ((Cat) entity).setCatType(((Cat) event.getFather()).getCatType());
                         }
                     } else {
-                        ((Ocelot) entity).setCatType(((Ocelot) event.getEntity()).getCatType());
+                        ((Cat) entity).setCatType(((Cat) event.getEntity()).getCatType());
                     }
                 }
                 
@@ -136,12 +136,15 @@ public class BiggerLitters extends AdvancedEnhancedMechanic implements Listener 
                         type = Rabbit.Type.THE_KILLER_BUNNY;
                     } else if (r >= 0.95) {
                         switch (event.getEntity().getLocation().getBlock().getBiome()) {
-                            case ICE_FLATS:
-                            case ICE_MOUNTAINS:
+                            case ICE_SPIKES:
+                            case SNOWY_MOUNTAINS:
+                            case SNOWY_BEACH:
+                            case SNOWY_TAIGA:
+                            case SNOWY_TAIGA_HILLS:
+                            case SNOWY_TAIGA_MOUNTAINS:
+                            case SNOWY_TUNDRA:
                             case FROZEN_OCEAN:
                             case FROZEN_RIVER:
-                            case TAIGA_COLD:
-                            case TAIGA_COLD_HILLS:
                                 if (RANDOM.nextDouble() < 0.8) {
                                     type = Rabbit.Type.WHITE;
                                 } else {

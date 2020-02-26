@@ -23,6 +23,7 @@ import de.themoep.enhancedvanilla.EnhancedVanilla;
 import de.themoep.enhancedvanilla.EnhancedUtils;
 import de.themoep.enhancedvanilla.mechanics.EnhancedMechanic;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,7 +33,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 public class TreeCutter extends EnhancedMechanic implements Listener {
 
@@ -45,35 +45,28 @@ public class TreeCutter extends EnhancedMechanic implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onLogBreak(BlockBreakEvent event) {
-        //log(Level.INFO, "Is TreeCutterBlockBreakEvent: " + (event instanceof TreeCutterBlockBreakEvent));
         if (!isEnabled() || event instanceof TreeCutterBlockBreakEvent)
             return;
 
-        //log(Level.INFO, "event.getPlayer().isSneaking(): " + event.getPlayer().isSneaking());
         if (event.getPlayer().isSneaking())
             return;
 
-        //log(Level.INFO, "event.getBlock().getType() != Material.LOG && event.getBlock().getType() != Material.LOG_2: " + (event.getBlock().getType() != Material.LOG && event.getBlock().getType() != Material.LOG_2));
-        if (event.getBlock().getType() != Material.LOG && event.getBlock().getType() != Material.LOG_2)
+        if (!Tag.LOGS.isTagged(event.getBlock().getType()))
             return;
 
         ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
-        //log(Level.INFO, "tool == null || !tool.getType().toString().contains(\"AXE\"): " + (tool == null || !tool.getType().toString().contains("AXE")));
         if (tool == null || !tool.getType().toString().contains("AXE"))
             return;
 
-        //log(Level.INFO, "!event.getPlayer().hasPermission(getPermissionNode()): " + (!event.getPlayer().hasPermission(getPermissionNode())));
         if (!event.getPlayer().hasPermission(getPermissionNode()))
             return;
 
         List<Block> tree = treeCache.getIfPresent(event.getPlayer().getUniqueId());
-        //log(Level.INFO, "tree == null || tree.size() <= 1 || !tree.contains(event.getBlock()): " + (tree == null || tree.size() <= 1 || !tree.contains(event.getBlock())));
         if (tree == null || tree.size() <= 1 || !tree.contains(event.getBlock())) {
             // User has no tree cached or the broken block is not in the last cached tree
             tree = EnhancedUtils.getTree(event.getBlock());
         }
 
-        //log(Level.INFO, "tree == null || tree.size() <= 1: " + (tree == null || tree.size() <= 1));
         if (tree == null || tree.size() <= 1) {
             // No tree found or size is 1 or 0
             return;
@@ -82,8 +75,7 @@ public class TreeCutter extends EnhancedMechanic implements Listener {
         event.setCancelled(true);
         Block block = tree.get(tree.size() - 1);
 
-        //log(Level.INFO, "block.getType() != Material.LOG && block.getType() != Material.LOG_2: " + (block.getType() != Material.LOG && block.getType() != Material.LOG_2));
-        if (block.getType() != Material.LOG && block.getType() != Material.LOG_2) {
+        if (!Tag.LOGS.isTagged(block.getType())) {
             tree.remove(block);
             treeCache.put(event.getPlayer().getUniqueId(), tree);
             return;
@@ -92,7 +84,6 @@ public class TreeCutter extends EnhancedMechanic implements Listener {
         TreeCutterBlockBreakEvent breakEvent = new TreeCutterBlockBreakEvent(block, event.getPlayer(), tree);
         plugin.getServer().getPluginManager().callEvent(breakEvent);
 
-        //log(Level.INFO, "!breakEvent.isCancelled(): " + (!breakEvent.isCancelled()));
         if (!breakEvent.isCancelled()) {
             tree = breakEvent.getTree();
             tree.remove(block);

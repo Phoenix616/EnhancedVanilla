@@ -22,12 +22,12 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.Directional;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.material.Attachable;
 
 
 public class LadderDropDown extends EnhancedMechanic implements Listener {
@@ -52,10 +52,10 @@ public class LadderDropDown extends EnhancedMechanic implements Listener {
             return;
 
         Block block = event.getClickedBlock().getRelative(BlockFace.DOWN);
-        if (!(block.isEmpty())  || block.isLiquid() || block.getType() == Material.DOUBLE_PLANT || block.getType() == Material.LONG_GRASS)
+        if (!(block.isEmpty())  || block.isLiquid())
             return;
         
-        Block against = block.getRelative(((Attachable) event.getClickedBlock().getState().getData()).getAttachedFace());
+        Block against = block.getRelative(((Directional) event.getClickedBlock().getState().getBlockData()).getFacing().getOppositeFace());
         if (!against.getType().isOccluding())
             return;
         

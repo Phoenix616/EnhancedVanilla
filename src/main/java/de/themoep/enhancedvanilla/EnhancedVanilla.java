@@ -45,38 +45,6 @@ public class EnhancedVanilla extends JavaPlugin {
         registerMechanic(new BetterCompass(this));
         registerMechanic(new BiggerLitters(this));
         registerMechanic(new HealItems(this));
-        // TODO: Attacking Polar Bears (all mobs?)
-        // TODO: Auto breeding of certain mobs? (Difficulty: Rabbits)
-        // TODO: Rabbits eating food
-        // TODO: Skeletons sink under water?
-        // TODO: Spreading of moss stone? (Difficulty: Meh)
-        // TODO: Wither Bones + wither bone meal (Difficulty: Resourcepack -.-')
-        // TODO: Herd behaviour (see enhanced llamas)
-        // TODO: Hoe for leave bulks?
-        // TODO: Unbreak iron golems (they don't spawn ;_;)
-        // TODO: Gap jumping mobs (Difficulty: Muh Pathfinders)
-        // TODO: Parrot eggs?
-        // TODO: Clear effects with water bottles?
-        // TODO: Improved structures generation e.g. updated villages, mineshafts with tnt etc. (Difficulty: Custom Worldgenerator)
-        // TODO: Blaze sound fix
-        // TODO: Swing through grass/similar blocks with swords
-        // TODO: Firework boost in boats and minearts?
-        // TODO: Pigzombies guarding quartz
-        // TODO: Aggressive Pigzombie Eyecolors (Difficulty: Custom Skull)
-        // TODO: Irregular Netherportals
-        // TODO: Sharp blocks hurt when mined without fists
-        // TODO: Decaying leaves ave effect (Difficulty: Repeating Tasks :/)
-        // TODO: Biome spawners (Difficulty: Resourcepack \o/)
-        // TODO: Natural drying sponges (Biome/Lava/Nether/Fire)
-        // TODO: Fuel efficiency/speed
-        // TODO: Cat type due to fish used to tame
-        // TODO: Spawn special villager types in Villages (Witches, Vindicator, etc.)
-        // TODO: Passive Mobs
-        // TODO: Enchantmenttable displays item
-        // TODO: Item despawn effect (flashing? particles?) (Difficulty: Delayed tasks or stuff)
-        
-        // Minecon Earth:
-        // TODO: Blaze King! <3
 
         loadConfig();
     }

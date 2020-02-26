@@ -23,6 +23,8 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.Snow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -51,7 +53,7 @@ public class ShaveSnowLayers extends EnhancedMechanic implements Listener {
         if (event.getClickedBlock().getType() != Material.SNOW)
             return;
 
-        if (!event.getItem().getType().toString().contains("SPADE"))
+        if (!event.getItem().getType().name().contains("SPADE"))
             return;
 
         if (!event.getPlayer().hasPermission(getPermissionNode()))
@@ -61,12 +63,12 @@ public class ShaveSnowLayers extends EnhancedMechanic implements Listener {
         BlockState previous = event.getClickedBlock().getState();
 
         BlockState newState = block.getState();
-        byte stage = block.getState().getData().getData();
-        if (stage == 0)
+        Snow data = (Snow) block.getState().getBlockData();
+        if (data.getLayers() == data.getMinimumLayers())
                 return;
-        stage--;
+        data.setLayers(data.getLayers() - 1);
 
-        newState.getData().setData(stage);
+        newState.setBlockData(data);
         newState.update(true, true);
 
         BlockPlaceEvent placeEvent = new BlockPlaceEvent(block, previous, block.getRelative(BlockFace.DOWN), event.getItem(), event.getPlayer(), true, event.getHand());
@@ -77,7 +79,7 @@ public class ShaveSnowLayers extends EnhancedMechanic implements Listener {
             block.getState().update(true, false);
         } else {
             EnhancedUtils.damageTool(event.getPlayer());
-            block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.SNOW_BALL, 2));
+            block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.SNOWBALL, 2));
             block.getWorld().playSound(block.getLocation(), Sound.BLOCK_SNOW_PLACE, 1.0F, 1.5F);
         }
     }
