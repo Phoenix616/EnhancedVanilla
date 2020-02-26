@@ -15,7 +15,7 @@ All mechanics are individually configurable in the config.
 - [x] DoorKnocking
 - [ ] All Mobs can attack (Difficulty: Custom mob AI?)
         
-**Based on [ideas](https://youtu.be/NSsac8V3BpA) by SimplySarc:**
+###### Based on [ideas](https://youtu.be/NSsac8V3BpA) by SimplySarc:
 - [x] BetterCompass
 - [x] BiggerLitters
 - [x] HealItems
@@ -52,18 +52,18 @@ All mechanics are individually configurable in the config.
 - [ ] Dolphins eat fish
 - [ ] Pigzombies get damanged in water
         
-**Minecon Earth:**
+###### Minecon Earth:
 - [ ] Blaze King! <3
 - [ ] Other custom mobs? (Resourcepack?)
         
-**Why Mojang?:**
+###### Why Mojang?:
 - [ ] TODO: Fix Particles Bugs (see https://minecraft.gamepedia.com/Particles Note 1)
         
-**IRC =D**
+###### IRC =D:
 - [ ] (Randomly) let mobs/entities drop items
 - [ ] Spawn Skeleton/Zombie horse when a normal one dies (depending on the cause of death) feat. LaxWasHere
         
 
-**Minecraft 2.0**
+###### Minecraft 2.0:
 - [ ] Zelda chickens
 - [ ] Overheating furnaces
