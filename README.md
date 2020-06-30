@@ -14,6 +14,7 @@ All mechanics are individually configurable in the config.
 - [x] BetterSilkTouch
 - [x] DoorKnocking
 - [ ] All Mobs can attack (Difficulty: Custom mob AI?)
+- [ ] Particles for certain sound-only effects (e.g. PigZombie anger)
         
 ###### Based on [ideas](https://youtu.be/NSsac8V3BpA) by SimplySarc:
 - [x] BetterCompass
@@ -63,7 +64,9 @@ All mechanics are individually configurable in the config.
 - [ ] (Randomly) let mobs/entities drop items
 - [ ] Spawn Skeleton/Zombie horse when a normal one dies (depending on the cause of death) feat. LaxWasHere
         
-
 ###### Minecraft 2.0:
 - [ ] Zelda chickens
 - [ ] Overheating furnaces
+
+#####ä Vanilla Tweaks by XisumaVoid
+- [ ] All of it
