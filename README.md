@@ -15,6 +15,7 @@ All mechanics are individually configurable in the config.
 - [x] DoorKnocking
 - [ ] All Mobs can attack (Difficulty: Custom mob AI?)
 - [ ] Particles for certain sound-only effects (e.g. PigZombie anger)
+- [ ] More Mob animation cycles (e.g. sleeping cats)
         
 ###### Based on [ideas](https://youtu.be/NSsac8V3BpA) by SimplySarc:
 - [x] BetterCompass
@@ -68,5 +69,5 @@ All mechanics are individually configurable in the config.
 - [ ] Zelda chickens
 - [ ] Overheating furnaces
 
-#####ä Vanilla Tweaks by XisumaVoid
+###### Vanilla Tweaks by XisumaVoid
 - [ ] All of it
