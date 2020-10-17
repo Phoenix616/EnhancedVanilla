@@ -41,7 +41,8 @@ public class EnhancedVanilla extends JavaPlugin {
         registerMechanic(new ShaveSnowLayers(this));
         registerMechanic(new BetterSilkTouch(this));
         registerMechanic(new DoorKnocking(this));
-        
+        registerMechanic(new MoreSounds(this));
+
         // The following mechanics are based on ideas by SimplySarc: https://youtu.be/NSsac8V3BpA
         registerMechanic(new BetterCompass(this));
         registerMechanic(new BiggerLitters(this));
