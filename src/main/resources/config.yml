@@ -135,3 +135,13 @@ more-sounds:
       sound: minecraft:entity.item.pickup
       pitch: 0.5
       volume: 0.5
+
+more-particles:
+  enabled: true
+  particles:
+    pig-zombie-anger:
+      particle: villager_angry
+      count: 3
+    item-despawn:
+      particle: reverse_portal
+      radius: 0

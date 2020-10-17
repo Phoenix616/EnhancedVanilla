@@ -14,8 +14,8 @@ All mechanics are individually configurable in the config.
 - [x] BetterSilkTouch: _Allows configuring of additional silk touch drops_
 - [x] DoorKnocking: _Allows knocking on doors by clicking on them_
 - [x] MoreSounds: _Play more sounds on certain events_
+- [x] MoreParticles: _Particles for certain sound-only effects (e.g. PigZombie anger)_
 - [ ] All Mobs can attack (Difficulty: Custom mob AI?)
-- [ ] Particles for certain sound-only effects (e.g. PigZombie anger)
 - [ ] More Mob animation cycles (e.g. sleeping cats)
         
 ###### Based on [ideas](https://youtu.be/NSsac8V3BpA) by SimplySarc:
