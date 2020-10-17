@@ -19,7 +19,7 @@ package de.themoep.enhancedvanilla;
  */
 
 import de.themoep.enhancedvanilla.mechanics.*;
-import de.themoep.enhancedvanilla.mechanics.bettersilktouch.BetterSilkTouch;
+import de.themoep.enhancedvanilla.mechanics.BetterSilkTouch;
 import de.themoep.enhancedvanilla.mechanics.treecutter.TreeCutter;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

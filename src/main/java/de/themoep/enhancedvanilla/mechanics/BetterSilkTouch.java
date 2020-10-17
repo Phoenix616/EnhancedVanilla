@@ -1,4 +1,4 @@
-package de.themoep.enhancedvanilla.mechanics.bettersilktouch;
+package de.themoep.enhancedvanilla.mechanics;
 
 /*
  * EnhancedVanilla
@@ -19,14 +19,13 @@ package de.themoep.enhancedvanilla.mechanics.bettersilktouch;
  */
 
 import de.themoep.enhancedvanilla.EnhancedVanilla;
-import de.themoep.enhancedvanilla.mechanics.AdvancedEnhancedMechanic;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -54,9 +53,9 @@ public class BetterSilkTouch extends AdvancedEnhancedMechanic implements Listene
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void onBlockBreak(BlockBreakEvent event) {
-        if (!isEnabled() || event instanceof BetterSilkTouchBlockBreakEvent)
+        if (!isEnabled())
             return;
 
         ItemStack tool = event.getPlayer().getInventory().getItemInMainHand();
@@ -66,19 +65,12 @@ public class BetterSilkTouch extends AdvancedEnhancedMechanic implements Listene
         if (!event.getPlayer().hasPermission(getPermissionNode()))
             return;
 
-        if (!blocks.contains(event.getBlock().getType()))
+        if (!blocks.contains(event.getBlock().getType()) || !event.isDropItems())
             return;
 
         ItemStack drop = event.getBlock().getState().getData().toItemStack(1);
         if (event.getBlock().getDrops().size() > 0) {
-            event.setCancelled(true);
-            BetterSilkTouchBlockBreakEvent breakEvent = new BetterSilkTouchBlockBreakEvent(event);
-            plugin.getServer().getPluginManager().callEvent(breakEvent);
-            if (!breakEvent.isCancelled()) {
-                event.getBlock().setType(Material.AIR);
-            } else {
-                return;
-            }
+            event.setDropItems(false);
         }
         event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), drop);
     }
