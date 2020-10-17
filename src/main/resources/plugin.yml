@@ -1,7 +1,7 @@
 name: ${project.name}
 main: de.themoep.enhancedvanilla.EnhancedVanilla
 version: '${minecraft.plugin.version}'
-api-version: '1.15'
+api-version: '1.16'
 description: ${project.description}
 authors: [Phoenix616]
 commands:

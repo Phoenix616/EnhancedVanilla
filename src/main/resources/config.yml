@@ -65,19 +65,42 @@ door-knocking:
   knock-with-right-click: false
   sounds:
     iron_door_block: entity.zombie.attack_iron_door
-    wooden_door: entity.zombie.attack_wooden_door
+    oak_door: entity.zombie.attack_wooden_door
     acacia_door: entity.zombie.attack_wooden_door
     birch_door: entity.zombie.attack_wooden_door
     jungle_door: entity.zombie.attack_wooden_door
     spruce_door: entity.zombie.attack_wooden_door
     dark_oak_door: entity.zombie.attack_wooden_door
-    trap_door:
+    warped_door: entity.zombie.attack_wooden_door
+    crimson_door: entity.zombie.attack_wooden_door
+    oak_trapdoor:
       sound: entity.zombie.attack_wooden_door
       pitch: 1.5
+    acacia_trapdoor:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 1.5
+    birch_trapdoor:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 1.5
+    jungle_trapdoor:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 1.5
+    spruce_trapdoor:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 1.5
+    dark_oak_trapdoor:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 1.5
+    warped_trapdoor:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 1.5
+    crimson_trapdoor:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 1.5 
     iron_trapdoor:
       sound: entity.zombie.attack_iron_door
       pitch: 1.2
-    fence_gate:
+    oak_fence_gate:
       sound: entity.zombie.attack_wooden_door
       pitch: 2
     acacia_fence_gate:
@@ -93,6 +116,12 @@ door-knocking:
       sound: entity.zombie.attack_wooden_door
       pitch: 2
     dark_oak_fence_gate:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 2
+    warped_fence_gate:
+      sound: entity.zombie.attack_wooden_door
+      pitch: 2
+    crimson_fence_gate:
       sound: entity.zombie.attack_wooden_door
       pitch: 2
 
