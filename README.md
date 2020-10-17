@@ -6,21 +6,21 @@ All mechanics are individually configurable in the config.
 
 ## Included Mechanics
 
-- [x] TreeCutter
-- [x] ChickenShearing
-- [x] LadderDropDown
-- [x] MinecartBlockPlacement
-- [x] ShaveSnowLayers
-- [x] BetterSilkTouch
-- [x] DoorKnocking
+- [x] TreeCutter: _Cut down trees from the top by breaking the bottom block_
+- [x] ChickenShearing: _Shear/pluck chicken to get a feather_
+- [x] LadderDropDown: _Click a ladder with another ladder to_ 
+- [x] MinecartBlockPlacement: _Directly add blocks to empty Minecarts_
+- [x] ShaveSnowLayers: _Right click snow with shovel to shave off layers_
+- [x] BetterSilkTouch: _Allows configuring of additional silk touch drops_
+- [x] DoorKnocking: _Allows knocking on doors by clicking on them_
 - [ ] All Mobs can attack (Difficulty: Custom mob AI?)
 - [ ] Particles for certain sound-only effects (e.g. PigZombie anger)
 - [ ] More Mob animation cycles (e.g. sleeping cats)
         
 ###### Based on [ideas](https://youtu.be/NSsac8V3BpA) by SimplySarc:
-- [x] BetterCompass
-- [x] BiggerLitters
-- [x] HealItems
+- [x] BetterCompass: _Configure where a compass points (North, Spawn, Deathpoint, Bed)_
+- [x] BiggerLitters: _Spawn multiple animals on breeding_
+- [x] HealItems: _Heal certain mobs with items like IronGolems with iron_
 - [ ] Attacking Polar Bears (all mobs?)
 - [ ] Auto breeding of certain mobs? (Difficulty: Rabbits)
 - [ ] Rabbits eating food
