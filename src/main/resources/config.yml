@@ -55,9 +55,6 @@ heal-items:
     snow-golem:
       snowball: 1.0
       snow_block: 9.0
-    iron-golem:
-      iron: 1.0
-      iron_ingot: 9.0
 
 door-knocking:
   enabled: true
