@@ -13,6 +13,7 @@ All mechanics are individually configurable in the config.
 - [x] ShaveSnowLayers: _Right click snow with shovel to shave off layers_
 - [x] BetterSilkTouch: _Allows configuring of additional silk touch drops_
 - [x] DoorKnocking: _Allows knocking on doors by clicking on them_
+- [x] MoreSounds: _Play more sounds on certain events_
 - [ ] All Mobs can attack (Difficulty: Custom mob AI?)
 - [ ] Particles for certain sound-only effects (e.g. PigZombie anger)
 - [ ] More Mob animation cycles (e.g. sleeping cats)
@@ -40,12 +41,12 @@ All mechanics are individually configurable in the config.
 - [ ] Pigzombies guarding quartz
 - [ ] Aggressive Pigzombie Eyecolors (Difficulty: Custom Skull)
 - [ ] Irregular Netherportals
-- [ ] Sharp blocks hurt when mined without fists
+- [ ] Sharp blocks hurt when mined without tools
 - [ ] Decaying leaves ave effect (Difficulty: Repeating Tasks :/)
 - [ ] Biome spawners (Difficulty: Resourcepack \o/)
 - [ ] Natural drying sponges (Biome/Lava/Nether/Fire)
 - [ ] Fuel efficiency/speed
-- [ ] Cat type due to fish used to tame
+- [ ] ~~Cat type due to fish used to tame~~
 - [ ] Spawn special villager types in Villages (Witches, Vindicator, etc.)
 - [ ] Passive Mobs
 - [ ] Enchantmenttable displays item

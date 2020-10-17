@@ -95,3 +95,17 @@ door-knocking:
     dark_oak_fence_gate:
       sound: entity.zombie.attack_wooden_door
       pitch: 2
+
+more-sounds:
+  enabled: true
+  sounds:
+    nether-portal-creation:
+      sound: minecraft:entity.chicken.egg
+      pitch: 0.5
+    player-join:
+      sound: minecraft:entity.chicken.egg
+      pitch: 1
+    item-despawn:
+      sound: minecraft:entity.item.pickup
+      pitch: 0.5
+      volume: 0.5

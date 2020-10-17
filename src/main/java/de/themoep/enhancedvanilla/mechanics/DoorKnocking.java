@@ -21,6 +21,7 @@ package de.themoep.enhancedvanilla.mechanics;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import de.themoep.enhancedvanilla.EnhancedVanilla;
+import de.themoep.enhancedvanilla.SoundInfo;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.Event;
@@ -39,7 +40,7 @@ import java.util.logging.Level;
 
 public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
 
-    private Map<Material, Knock> sounds = new HashMap<>();
+    private Map<Material, SoundInfo> sounds = new HashMap<>();
     private boolean requiresSneaking;
     private boolean knockWithRightClick;
 
@@ -63,23 +64,27 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         }
 
         ConfigurationSection soundsCfg = getConfig().getConfigurationSection("sounds");
-        for (String matStr : soundsCfg.getKeys(false)) {
-            try {
-                Material mat = Material.valueOf(matStr.toUpperCase());
-                if (soundsCfg.isConfigurationSection(matStr)) {
-                    sounds.put(mat, new Knock(
-                            soundsCfg.getString(matStr + ".sound"),
-                            (float) soundsCfg.getDouble(matStr + ".volume", 1),
-                            (float) soundsCfg.getDouble(matStr + ".pitch", 1))
-                    );
-                } else {
-                    sounds.put(mat, new Knock(soundsCfg.getString(matStr)));
+        if (soundsCfg != null) {
+            for (String matStr : soundsCfg.getKeys(false)) {
+                try {
+                    Material mat = Material.valueOf(matStr.toUpperCase());
+                    if (soundsCfg.isConfigurationSection(matStr)) {
+                        sounds.put(mat, new SoundInfo(
+                                soundsCfg.getString(matStr + ".sound"),
+                                (float) soundsCfg.getDouble(matStr + ".volume", 1),
+                                (float) soundsCfg.getDouble(matStr + ".pitch", 1))
+                        );
+                    } else {
+                        sounds.put(mat, new SoundInfo(soundsCfg.getString(matStr)));
+                    }
+                } catch (NumberFormatException e) {
+                    log(Level.SEVERE, matStr + " is not a valid Bukkit MaterialData!");
+                } catch (IllegalArgumentException e) {
+                    log(Level.SEVERE, matStr + " is not a valid Bukkit Material name!");
                 }
-            } catch (NumberFormatException e) {
-                log(Level.SEVERE, matStr + " is not a valid Bukkit MaterialData!");
-            } catch (IllegalArgumentException e) {
-                log(Level.SEVERE, matStr + " is not a valid Bukkit Material name!");
             }
+        } else {
+            log(Level.WARNING, "No sounds defined in config!");
         }
     }
 
@@ -124,9 +129,9 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         if (event.getClickedBlock() == null || !sounds.containsKey(event.getClickedBlock().getType()))
             return;
 
-        Knock knock = sounds.get(event.getClickedBlock().getType());
+        SoundInfo soundInfo = sounds.get(event.getClickedBlock().getType());
 
-        event.getClickedBlock().getWorld().playSound(event.getClickedBlock().getLocation(), knock.getSound(), knock.getVolume(), knock.getPitch());
+        event.getClickedBlock().getWorld().playSound(event.getClickedBlock().getLocation(), soundInfo.getSound(), soundInfo.getVolume(), soundInfo.getPitch());
 
         if (knockWithRightClick)
             event.setUseInteractedBlock(Event.Result.DENY);
@@ -134,31 +139,4 @@ public class DoorKnocking extends AdvancedEnhancedMechanic implements Listener {
         event.setCancelled(true);
     }
 
-    private class Knock {
-        private final String sound;
-        private final float volume;
-        private final float pitch;
-
-        public Knock(String sound) {
-            this(sound, 1, 1);
-        }
-
-        public Knock(String sound, float volume, float pitch) {
-            this.sound = sound;
-            this.volume = volume;
-            this.pitch = pitch;
-        }
-
-        public String getSound() {
-            return sound;
-        }
-
-        public float getVolume() {
-            return volume;
-        }
-
-        public float getPitch() {
-            return pitch;
-        }
-    }
 }
