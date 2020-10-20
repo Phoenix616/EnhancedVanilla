@@ -19,35 +19,62 @@ package de.themoep.enhancedvanilla;
  */
 
 import de.themoep.enhancedvanilla.mechanics.*;
-import de.themoep.enhancedvanilla.mechanics.BetterSilkTouch;
 import de.themoep.enhancedvanilla.mechanics.treecutter.TreeCutter;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class EnhancedVanilla extends JavaPlugin {
 
     private Map<String, EnhancedMechanic> mechanics = new LinkedHashMap<>();
 
-    public void onEnable() {
-        registerMechanic(new TreeCutter(this));
-        registerMechanic(new ChickenShearing(this));
-        registerMechanic(new LadderDropDown(this));
-        registerMechanic(new MinecartBlockPlacement(this));
-        registerMechanic(new ShaveSnowLayers(this));
-        registerMechanic(new BetterSilkTouch(this));
-        registerMechanic(new DoorKnocking(this));
-        registerMechanic(new MoreSounds(this));
-        registerMechanic(new MoreParticles(this));
+    private final List<Class<? extends EnhancedMechanic>> availableMechanics = Arrays.asList(
+            TreeCutter.class,
+            ChickenShearing.class,
+            LadderDropDown.class,
+            MinecartBlockPlacement.class,
+            ShaveSnowLayers.class,
+            BetterSilkTouch.class,
+            DoorKnocking.class,
+            MoreSounds.class,
+            MoreParticles.class,
+            // The following mechanics are based on ideas by SimplySarc: https://youtu.be/NSsac8V3BpA
+            BetterCompass.class,
+            BiggerLitters.class,
+            HealItems.class
+    );
 
-        // The following mechanics are based on ideas by SimplySarc: https://youtu.be/NSsac8V3BpA
-        registerMechanic(new BetterCompass(this));
-        registerMechanic(new BiggerLitters(this));
-        registerMechanic(new HealItems(this));
+    public void onEnable() {
+        for (Class<? extends EnhancedMechanic> mechanic : availableMechanics) {
+            try {
+                Constructor<? extends EnhancedMechanic> constructor = null;
+                try {
+                    constructor = mechanic.getConstructor(getClass());
+                } catch (NoSuchMethodException ignored) {}
+                if (constructor == null) {
+                    getLogger().severe("Unable to get constructor of " + mechanic);
+                    continue;
+                }
+
+                EnhancedMechanic m = constructor.newInstance(this);
+
+                mechanics.put(m.getName(), m);
+                if (m instanceof Listener) {
+                    getServer().getPluginManager().registerEvents((Listener) m, this);
+                }
+            } catch (Throwable e) {
+                getLogger().log(Level.SEVERE, "Error while creating new instance of " + mechanic, e);
+            }
+        }
 
         loadConfig();
     }
@@ -69,9 +96,5 @@ public class EnhancedVanilla extends JavaPlugin {
             }
         }
         return false;
-    }
-
-    public void registerMechanic(EnhancedMechanic mechanic) {
-        mechanics.put(mechanic.getClass().getTypeName(), mechanic);
     }
 }
