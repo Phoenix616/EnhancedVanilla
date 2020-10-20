@@ -40,6 +40,7 @@ import org.bukkit.material.Colorable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
 
 public class BiggerLitters extends AdvancedEnhancedMechanic implements Listener {
     
@@ -55,8 +56,16 @@ public class BiggerLitters extends AdvancedEnhancedMechanic implements Listener 
     public void loadConfig() {
         super.loadConfig();
         moreExp = getConfig().getBoolean("more-exp");
-        for (String typeStr : getConfig().getConfigurationSection("mobs").getKeys(false)) {
-            litterSettings.put(EntityType.valueOf(typeStr.toUpperCase()), new LitterSetting(getConfig().getConfigurationSection(typeStr)));
+        ConfigurationSection mobs = getConfig().getConfigurationSection("mobs");
+        if (mobs != null) {
+            for (String typeStr : mobs.getKeys(false)) {
+                ConfigurationSection settings = mobs.getConfigurationSection(typeStr);
+                if (settings != null) {
+                    litterSettings.put(EntityType.valueOf(typeStr.toUpperCase()), new LitterSetting(settings));
+                } else {
+                    log(Level.WARNING, typeStr + " is not a configuration section!");
+                }
+            }
         }
     }
     
