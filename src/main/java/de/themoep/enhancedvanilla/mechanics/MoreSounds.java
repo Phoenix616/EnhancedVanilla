@@ -74,7 +74,7 @@ public class MoreSounds extends AdvancedEnhancedMechanic implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (isEnabled()) {
-            playSound(event.getPlayer().getLocation(), "player-join");
+            playSound(event.getPlayer(), event.getPlayer().getLocation(), "player-join");
         }
     }
 
@@ -90,6 +90,20 @@ public class MoreSounds extends AdvancedEnhancedMechanic implements Listener {
             SoundInfo soundInfo = sounds.get(sound);
             if (soundInfo != null) {
                 location.getWorld().playSound(location, soundInfo.getSound(), soundInfo.getVolume(), soundInfo.getPitch());
+            }
+        }
+    }
+
+    private void playSound(Player sender, Location location, String sound) {
+        if (location.getWorld() != null) {
+            SoundInfo soundInfo = sounds.get(sound);
+            if (soundInfo != null) {
+                for (Player player : location.getWorld().getPlayers()) {
+                    if (player.getWorld() == location.getWorld() && player.canSee(sender)
+                            && player.getLocation().distanceSquared(location) < 1024) {
+                        player.playSound(location, soundInfo.getSound(), soundInfo.getVolume(), soundInfo.getPitch());
+                    }
+                }
             }
         }
     }
