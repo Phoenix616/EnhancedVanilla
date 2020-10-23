@@ -83,7 +83,11 @@ public class EnhancedVanilla extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         for (EnhancedMechanic mechanic : mechanics.values()) {
-            mechanic.loadConfig();
+            try {
+                mechanic.loadConfig();
+            } catch (Throwable e) {
+                getLogger().log(Level.SEVERE, "Error while loading config of " + mechanic.getName(), e);
+            }
         }
     }
 
