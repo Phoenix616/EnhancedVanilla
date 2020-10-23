@@ -61,7 +61,7 @@ public class BiggerLitters extends AdvancedEnhancedMechanic implements Listener 
             for (String typeStr : mobs.getKeys(false)) {
                 ConfigurationSection settings = mobs.getConfigurationSection(typeStr);
                 if (settings != null) {
-                    litterSettings.put(EntityType.valueOf(typeStr.toUpperCase()), new LitterSetting(settings));
+                    litterSettings.put(EntityType.valueOf(typeStr.toUpperCase().replace('-', '_')), new LitterSetting(settings));
                 } else {
                     log(Level.WARNING, typeStr + " is not a configuration section!");
                 }

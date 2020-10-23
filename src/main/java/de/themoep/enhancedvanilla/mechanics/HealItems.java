@@ -52,7 +52,7 @@ public class HealItems extends AdvancedEnhancedMechanic implements Listener {
             for (String typeStr : mobs.getKeys(false)) {
                 ConfigurationSection settings = mobs.getConfigurationSection(typeStr);
                 if (settings != null) {
-                    healSettings.put(EntityType.valueOf(typeStr.toUpperCase()), new HealSetting(settings));
+                    healSettings.put(EntityType.valueOf(typeStr.toUpperCase().replace('-', '_')), new HealSetting(settings));
                 } else {
                     log(Level.WARNING, typeStr + " is not a configuration section!");
                 }

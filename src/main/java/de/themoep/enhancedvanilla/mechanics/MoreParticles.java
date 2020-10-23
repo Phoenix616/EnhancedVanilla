@@ -27,8 +27,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ItemDespawnEvent;
 import org.bukkit.event.entity.PigZombieAngerEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.world.PortalCreateEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -111,7 +109,7 @@ public class MoreParticles extends AdvancedEnhancedMechanic implements Listener 
         }
 
         public ParticleInfo(String particle, int count, double radius, double speed) {
-            this.particle = Particle.valueOf(particle.toUpperCase());
+            this.particle = Particle.valueOf(particle.toUpperCase().replace('-', '_'));
             this.count = count;
             this.radius = radius;
             this.speed = speed;
