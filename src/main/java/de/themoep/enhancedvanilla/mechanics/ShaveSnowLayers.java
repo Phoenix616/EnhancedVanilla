@@ -83,8 +83,7 @@ public class ShaveSnowLayers extends EnhancedMechanic implements Listener {
         plugin.getServer().getPluginManager().callEvent(placeEvent);
 
         if (placeEvent.isCancelled() || !placeEvent.canBuild()) {
-            block.getState().setData(placeEvent.getBlockReplacedState().getData());
-            block.getState().update(true, false);
+            placeEvent.getBlockReplacedState().update(true, false);
         } else {
             EnhancedUtils.damageTool(event.getPlayer());
             block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.SNOWBALL, 2));
