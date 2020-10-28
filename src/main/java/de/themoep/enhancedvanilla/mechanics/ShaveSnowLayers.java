@@ -52,10 +52,10 @@ public class ShaveSnowLayers extends EnhancedMechanic implements Listener {
         if (event.getClickedBlock() == null || event.getItem() == null)
             return;
 
-        if (event.getClickedBlock().getType() != Material.SNOW)
+        if (event.getClickedBlock().getType() != Material.SNOW && event.getClickedBlock().getType() != Material.SNOW_BLOCK)
             return;
 
-        if (!event.getItem().getType().name().contains("SPADE"))
+        if (!event.getItem().getType().name().endsWith("_SHOVEL"))
             return;
 
         if (!event.getPlayer().hasPermission(getPermissionNode()))
@@ -65,11 +65,17 @@ public class ShaveSnowLayers extends EnhancedMechanic implements Listener {
         BlockState previous = event.getClickedBlock().getState();
 
         BlockState newState = block.getState();
-        Snow data = (Snow) block.getState().getBlockData();
-        if (data.getLayers() == data.getMinimumLayers())
+        Snow data;
+        if (block.getType() == Material.SNOW) {
+            data = (Snow) newState.getBlockData();
+            if (data.getLayers() == data.getMinimumLayers())
                 return;
-        data.setLayers(data.getLayers() - 1);
-
+            data.setLayers(data.getLayers() - 1);
+        } else { // is SNOW_BLOCK
+            newState.setType(Material.SNOW);
+            data = (Snow) newState.getBlockData();
+            data.setLayers(7);
+        }
         newState.setBlockData(data);
         newState.update(true, true);
 
