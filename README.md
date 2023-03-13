@@ -17,6 +17,7 @@ All mechanics are individually configurable in the config.
 - [x] MoreParticles: _Particles for certain sound-only effects (e.g. PigZombie anger)_
 - [ ] All Mobs can attack (Difficulty: Custom mob AI?)
 - [ ] More Mob animation cycles (e.g. sleeping cats)
+- [ ] Torchflower emitts light (1.20)
         
 ###### Based on [ideas](https://youtu.be/NSsac8V3BpA) by SimplySarc:
 - [x] BetterCompass: _Configure where a compass points (North, Spawn, Deathpoint, Bed)_
